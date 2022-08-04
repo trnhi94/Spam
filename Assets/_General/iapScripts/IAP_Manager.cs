@@ -65,14 +65,13 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
         for (int i = 0; i < id.Count; i++)
         {
-            if (i < 12)
             {
                 IAP_Product item = new IAP_Product()
                 {
                     _ProductID = id[i],
                     _Type = ProductType.NonConsumable
                 };
-                builder.AddProduct(id[i], ProductType.NonConsumable);
+                builder.AddProduct(id[i], ProductType.Consumable);
                 _arrProducts.Add(item);
             }
             else
