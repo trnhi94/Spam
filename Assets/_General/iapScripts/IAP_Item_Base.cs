@@ -99,6 +99,6 @@ public class IAP_Item_Base : MonoBehaviour
 
     public virtual void GetTitle()
     {
-        gameObject.transform.GetComponentInChildren<TextMeshProUGUI>().text = IAP_Manager.instance.GetLocalizedTitle(IAP_Manager.id[_productID]);
+        // gameObject.transform.GetComponentInChildren<TextMeshProUGUI>().text = IAP_Manager.instance.GetLocalizedTitle(IAP_Manager.id[_productID]);
     }
 }

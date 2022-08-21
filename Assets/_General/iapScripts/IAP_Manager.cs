@@ -16,7 +16,6 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
     public string x;
     public string y;
     public string z;
-    public string a;
     Action<bool> callBackBuyProduct;
 
     private void Awake()
@@ -27,6 +26,7 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
         $"{x}_{y}_1.3",
         $"{x}_{y}_1.4",
         $"{x}_{y}_1.5",
+        $"{x}_{y}_1.6",
 
         $"{x}_{z}_2.1",
     };
