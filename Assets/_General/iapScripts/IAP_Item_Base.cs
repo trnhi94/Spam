@@ -87,6 +87,12 @@ public class IAP_Item_Base : MonoBehaviour
             {
             }
         }
+        if (productID.Equals(IAP_Manager.id[6]))
+        {
+            if (IAP_Manager.instance._arrProducts[6].isBuy == false)
+            {
+            }
+        }
     }
     //public virtual void GetPrice(string productID)
     //{

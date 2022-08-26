@@ -16,7 +16,6 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
     public string x;
     public string y;
     public string z;
-    public string a;
     Action<bool> callBackBuyProduct;
 
     private void Awake()
@@ -27,6 +26,7 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
         $"{x}_{y}_1.3",
         $"{x}_{y}_1.4",
         $"{x}_{y}_1.5",
+        $"{x}_{y}_1.6",
 
         $"{x}_{z}_2.1",
     };
@@ -65,11 +65,12 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
         for (int i = 0; i < id.Count; i++)
         {
+            if (i < 6)
             {
                 IAP_Product item = new IAP_Product()
                 {
                     _ProductID = id[i],
-                    _Type = ProductType.NonConsumable
+                    _Type = ProductType.Consumable
                 };
                 builder.AddProduct(id[i], ProductType.Consumable);
                 _arrProducts.Add(item);
@@ -103,12 +104,12 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
             Product product = m_StoreController.products.WithID(productId);
             string price = product.metadata.localizedPriceString;
-            
+
             if (product != null && product.availableToPurchase)
             {
                 if (callBack != null)
                 {
-                    callBackBuyProduct = callBack;                    
+                    callBackBuyProduct = callBack;
                 }
 
                 Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
@@ -182,7 +183,11 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
-            Application.platform == RuntimePlatform.OSXPlayer)
+            Application.platform == RuntimePlatform.OSXPlayer ||
+            Application.platform == RuntimePlatform.WindowsPlayer ||
+            Application.platform == RuntimePlatform.Android ||
+            Application.platform == RuntimePlatform.WindowsEditor
+            )
         {
             Debug.Log("RestorePurchases started ...");
             var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
