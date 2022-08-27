@@ -9,11 +9,14 @@ public class IAP_Item_Base : MonoBehaviour
 {
     [SerializeField]
     internal int _productID;
+    [SerializeField] private TextMeshProUGUI _txtPrice;
+    [SerializeField] private TextMeshProUGUI _txtTitle;
 
     private void OnEnable()
     {
         GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Buy);
         GetTitle();
+        GetPrice();
     }
 
     [SerializeField]
@@ -93,6 +96,29 @@ public class IAP_Item_Base : MonoBehaviour
             {
             }
         }
+        if (productID.Equals(IAP_Manager.id[7]))
+        {
+            if (IAP_Manager.instance._arrProducts[7].isBuy == false)
+            {
+            }
+        }
+        if (productID.Equals(IAP_Manager.id[8]))
+        {
+            if (IAP_Manager.instance._arrProducts[8].isBuy == false)
+            {
+            }
+        }if (productID.Equals(IAP_Manager.id[9]))
+        {
+            if (IAP_Manager.instance._arrProducts[9].isBuy == false)
+            {
+            }
+        }if (productID.Equals(IAP_Manager.id[10]))
+        {
+            if (IAP_Manager.instance._arrProducts[10].isBuy == false)
+            {
+            }
+        }
+
     }
     //public virtual void GetPrice(string productID)
     //{
@@ -105,6 +131,15 @@ public class IAP_Item_Base : MonoBehaviour
 
     public virtual void GetTitle()
     {
-        gameObject.transform.GetComponentInChildren<TextMeshProUGUI>().text = IAP_Manager.instance.GetLocalizedTitle(IAP_Manager.id[_productID]);
+        _txtTitle.GetComponent<TextMeshProUGUI>().text = IAP_Manager.instance.GetLocalizedTitle(IAP_Manager.id[_productID]);
+        if(_txtTitle.GetComponent<TextMeshProUGUI>().text == "Loading...")
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    public virtual void GetPrice()
+    {
+        _txtPrice.GetComponent<TextMeshProUGUI>().text = IAP_Manager.instance.GetLocalizedPrice(IAP_Manager.id[_productID]);
     }
 }

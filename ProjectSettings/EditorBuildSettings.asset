@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Thang8/PersonalWorldDictionary/PWD.unity
-    guid: 8944f32e41ae73642a6afefbf042c0a8
+    path: Assets/_Thang8/ShutDownCans/SDC.unity
+    guid: 7bf8c57fed7b8bd4b8a57c4ea479eb14
   m_configObjects: {}

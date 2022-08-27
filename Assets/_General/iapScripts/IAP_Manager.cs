@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Purchasing;
@@ -14,21 +15,26 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
     public List<IAP_Product> _arrProducts = new List<IAP_Product>();
 
     public string x;
-    public string y;
-    public string z;
+    private double _totalPrice;
+    public TextMeshProUGUI totalPrice;
+    //public string y;
+    //public string z;
     Action<bool> callBackBuyProduct;
 
     private void Awake()
     {
         id = new List<string>()  {
-        $"{x}_{y}_1.1",
-        $"{x}_{y}_1.2",
-        $"{x}_{y}_1.3",
-        $"{x}_{y}_1.4",
-        $"{x}_{y}_1.5",
-        $"{x}_{y}_1.6",
+        $"{x}_1.1",
+        $"{x}_1.2",
+        $"{x}_1.3",
+        $"{x}_1.4",
+        $"{x}_1.5",
+        $"{x}_1.6",
+        $"{x}_1.7",
+        $"{x}_1.8",
 
-        $"{x}_{z}_2.1",
+        $"{x}_sub_2.1",
+        $"{x}_sub_2.2",
     };
 
         DontDestroyOnLoad(gameObject);
@@ -49,6 +55,11 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
         if (m_StoreController == null)
         {
             InitializePurchasing();
+            totalPrice.text = "Wallet: " + PlayerPrefs.GetString("total");
+            if(PlayerPrefs.HasKey("total"))
+            {
+                _totalPrice = Double.Parse(PlayerPrefs.GetString("total"));
+            }
         }
     }
 
@@ -65,7 +76,7 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
         for (int i = 0; i < id.Count; i++)
         {
-            if (i < 6)
+            if (i < 8)
             {
                 IAP_Product item = new IAP_Product()
                 {
@@ -113,6 +124,9 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
                 }
 
                 Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+                _totalPrice += Convert.ToDouble(product.metadata.localizedPrice);
+                PlayerPrefs.SetString("total", _totalPrice.ToString());
+                totalPrice.text = "Wallet: " + _totalPrice.ToString();
                 m_StoreController.InitiatePurchase(product);
                 callBack.Invoke(true);
             }
@@ -146,7 +160,7 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
             }
             else
             {
-                return "Loading...";
+                return string.Empty;
             }
         }
 
@@ -161,7 +175,16 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
             if (product != null && product.availableToPurchase)
             {
-                return product.metadata.localizedTitle;
+                string stringPrice = product.metadata.localizedTitle;
+                if (stringPrice.Contains('('))
+                {
+                    string[] result = stringPrice.Split('(');
+                    return result[0];
+                }
+                else
+                {
+                    return stringPrice;
+                }
             }
             else
             {
@@ -259,6 +282,12 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
         if (callBackBuyProduct != null)
             callBackBuyProduct.Invoke(false);
+    }
+
+    public void ResetPlayerPref()
+    {
+        PlayerPrefs.DeleteAll();
+        Debug.LogWarning("DeleteAll");
     }
 }
 
