@@ -6,18 +6,20 @@ using UnityEngine.SceneManagement;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] GameObject Content;
+    [SerializeField] GameObject panel;
 
     public string ScenePlay;
 
     public void Show()
     {
         Content.SetActive(true);
+        panel.SetActive(true);
     }
 
     public void Hide()
     {
         Content.SetActive(false);
-
+        panel.SetActive(false);
     }
 
     public void PlayBtn()
