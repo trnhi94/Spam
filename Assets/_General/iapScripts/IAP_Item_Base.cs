@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class IAP_Item_Base : MonoBehaviour
 {
     [SerializeField]
     internal int _productID;
 
+    [SerializeField] private TextMeshProUGUI _text;
     private void OnEnable()
     {
         GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Buy);
@@ -27,7 +29,7 @@ public class IAP_Item_Base : MonoBehaviour
 
     private void Buy()
     {
-
+        _text.text = $"{UnityEngine.Random.Range(0,100)} Gold(s)";
         Debug.Log(IAP_Manager.id[_productID]);
         if (_iapManager != null && !string.IsNullOrEmpty(IAP_Manager.id[_productID]))
         {
