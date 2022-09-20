@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -25,8 +24,11 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
         $"{x}_1.4",
         $"{x}_1.5",
         $"{x}_1.6",
+        $"{x}_1.7",
+        $"{x}_1.8",
 
         $"{x}_sub_2.1",
+        $"{x}_sub_2.2",
     };
 
         DontDestroyOnLoad(gameObject);
@@ -63,7 +65,7 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
         for (int i = 0; i < id.Count; i++)
         {
-            if (i < 5)
+            if (i < 12)
             {
                 IAP_Product item = new IAP_Product()
                 {
