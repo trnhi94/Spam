@@ -14,21 +14,19 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
     public List<IAP_Product> _arrProducts = new List<IAP_Product>();
 
     public string x;
-    public string y;
-    public string z;
     Action<bool> callBackBuyProduct;
 
     private void Awake()
     {
         id = new List<string>()  {
-        $"{x}_{y}_1.1",
-        $"{x}_{y}_1.2",
-        $"{x}_{y}_1.3",
-        $"{x}_{y}_1.4",
-        $"{x}_{y}_1.5",
-        $"{x}_{y}_1.6",
+        $"{x}_1.1",
+        $"{x}_1.2",
+        $"{x}_1.3",
+        $"{x}_1.4",
+        $"{x}_1.5",
+        $"{x}_1.6",
 
-        $"{x}_{z}_2.1",
+        $"{x}_sub_2.1",
     };
 
         DontDestroyOnLoad(gameObject);
@@ -65,14 +63,14 @@ public class IAP_Manager : MonoBehaviour, IStoreListener
 
         for (int i = 0; i < id.Count; i++)
         {
-            if (i < 12)
+            if (i < 5)
             {
                 IAP_Product item = new IAP_Product()
                 {
                     _ProductID = id[i],
-                    _Type = ProductType.NonConsumable
+                    _Type = ProductType.Consumable
                 };
-                builder.AddProduct(id[i], ProductType.NonConsumable);
+                builder.AddProduct(id[i], ProductType.Consumable);
                 _arrProducts.Add(item);
             }
             else
